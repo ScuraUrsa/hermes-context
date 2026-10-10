@@ -1,0 +1,9 @@
+# Append to ScuraUrsa/WOBI features/registry.yaml (under `features:`).
+# status: dev | stage | prod-experimental | prod-stable | retired
+# A prod-experimental feature gets a review gate `review_after_days` (7) after `since`.
+  - id: <name>
+    name: <Polish name Filip recognises>
+    status: dev
+    since: <YYYY-MM-DD>
+    where: github.com/ScuraUrsa/hermes-<name>; WOBI role <name>; <VM paths/services>
+    notes: <what is still missing>
