@@ -5,7 +5,7 @@ built, deployed and operated, and how to contribute a separate add-on product wi
 ScuraUrsa repository.
 
 Jedno miejsce z pełnym kontekstem Hermesa dla agentów z innych projektów. Wersja dla ludzi (po polsku):
-Notion → Hermes Organized → „Hermes — kontekst dla agentów”.
+[Notion → Hermes Organized → „Hermes — kontekst dla agentów”](https://app.notion.com/p/3f5ee453d19e8160b331ca802a9bc14e).
 
 **Start with [AGENTS.md](AGENTS.md).**
 

@@ -57,4 +57,4 @@ ScuraUrsa repos to contribute.
 
 This repo is a snapshot that must be kept current. When your work changes a fact stated here (a new repo,
 a moved service, a new cron job, a new rule from Filip), update the relevant doc in the same PR series and
-the Notion mirror "Hermes — kontekst dla agentów". Date every status claim.
+the Notion mirror ["Hermes — kontekst dla agentów"](https://app.notion.com/p/3f5ee453d19e8160b331ca802a9bc14e). Date every status claim.
