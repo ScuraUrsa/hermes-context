@@ -13,6 +13,7 @@ and skill, cron jobs, an HTTP intake service, Notion pages, and a small WOBI rol
 | Tools Hermes calls with structured arguments | **Hermes plugin** (Python, enabled in `config.yaml`) | `plugins/timeplane`, `honcho` |
 | A command-line tool Hermes and Filip both use | **CLI** in `~/.local/bin` + a skill that teaches it | `tp`, `gacct`, `phone`, `agent-run` |
 | Something that runs on a schedule | **Hermes cron job**; prefer *no-agent* (script only, no LLM) jobs, use an LLM only when needed | `timeplane-tick`, `google-token-check` |
+| Something that needs to *ask Hermes* (a UI, HA, another app) | **Hermes API server** `127.0.0.1:8642/v1` (OpenAI-compatible, model `hermes`, key `HERMES_API_SERVER_KEY`); local to prod only | HA voice pipeline |
 | A long-running service | **systemd unit or Docker Compose service**, bound to localhost / host-only / Tailscale only | `timeplane-intake`, notification bridge |
 | Work Hermes should do in the background | **kanban task** for a profile (`hermes kanban create ...`) | YouTube archive tasks |
 | Something Filip sees or taps | Notion page/database, Home Assistant entity/button, phone notification | "🧭 Hermes — Plan dnia", HA break buttons |

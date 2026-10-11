@@ -12,8 +12,8 @@
 | Notion: "Hermes Organized", "Baza wiedzy Hermesa", "Przegląd wiedzy: Hermes: konfiguracja i działanie", skill page "hermes-operations", "Przegląd sesji Hermesa" | operations, history |
 | Project threads (VM lifecycle, GitHub Actions, coding tools benchmark, timeplane, phone access) | latest changes |
 
-Not read for this snapshot: `D:\hermes\HERMES_MAP.md` on Filip's PC (the older system map and changelog),
-the live VMs.
+`D:\hermes\HERMES_MAP.md` on Filip's PC (system map + changelog, read 2026-10-11, version of 2026-10-11 12:45 UTC).
+Not read: the live VMs.
 
 ## Glossary
 

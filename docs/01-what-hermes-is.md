@@ -36,6 +36,8 @@ in the background (cron jobs, a kanban board of tasks, coding through Claude Cod
 | Autonomous work 24/7 | Planner creates tasks from a roadmap, workers (profiles) execute them on the kanban board, Claude Code writes the code, results go to GitHub through PRs | dev VM, `crewai-orchestrator` (docs, scripts) | working, being reviewed (quality/cost) |
 | CI care | `gh-actions-watchdog` / "CI doctor" opens fix tasks for red GitHub Actions in ScuraUrsa repos | WOBI scripts | dev |
 | YouTube | Archive of subscriptions/playlists, transcripts; "video-digest" (watch videos for Filip, write Notion report) in progress | `crewai-orchestrator/scripts/youtube_*`, `hermes-enhancements` PR #8 | partly built |
+| Contacts | Personal CRM in Notion: `contacts show Mama`, `contacts met Buła` (aliases, last contact, notes) | `hermes-contact-crm` (private, PR #1), CLI `contacts`, skill `contact-crm` | live on prod since 2026-10-11, not in WOBI yet |
+| Private chat (planned) | Matrix server (Continuwuity) on the tailnet for chat with Hermes and alerts to a locked phone | `~/matrix` on prod | server up since 2026-10-09; bot not created; not in WOBI or the backup |
 | Knowledge base | Writes findings to Notion ("Baza wiedzy Hermesa" database) | Notion | working |
 | Self-maintenance | Nightly encrypted backup, rebuild/cutover of its own VM, upgrades through dev → stage → prod | WOBI, hermes-infra | prod-experimental |
 
@@ -55,6 +57,8 @@ voice assistant skeleton, trading system, Nextcloud deployment design, research 
    tokens on his behalf (an HA admin token Hermes once minted itself is considered a mistake).
 5. **Sending mail, deleting files, posting anything outside the project, spending money** needs his
    explicit OK.
+   Note: Hermes itself runs with `approvals.mode: off` (no confirmation prompts), so these rules live in
+   skills, SOULs and memory, not in a technical gate.
 6. **Changes go through PRs with review** (since 2026-10-08). No direct pushes to default branches.
 7. **The live VM is not a lab.** Experiments happen on dev, a replica, or stage; prod gets tested changes.
 8. Filip's own tasks always beat Hermes' self-generated work (priority 100 vs 0–10), and self-work has a

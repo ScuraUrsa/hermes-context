@@ -9,7 +9,7 @@ keep for reference · **legacy** = superseded · ⚠️ = contains leaked secret
 |---|---|---|---|
 | [WOBI](https://github.com/ScuraUrsa/WOBI) | `master` (newest work on **`iac/final`**, ~130 commits ahead) | **Source of truth for VMs**: Ansible roles (`ansible/`), `pull.sh`, versioned `~/.hermes/scripts`, `features/registry.yaml`; old CrewAI app copy | core, active |
 | [hermes-infra](https://github.com/ScuraUrsa/hermes-infra) ⚠️ history | `main` | `hermes-host-daemon` (Windows, VM lifecycle, replicas, cutover, approvals), `phone-control/`, docs (`self-upgrade-flow.md`), Coder SOUL.md, config snapshots | core, active |
-| [hermes-agent](https://github.com/ScuraUrsa/hermes-agent) | `main` | Fork of NousResearch Hermes Agent: provider semaphore, kanban goal-loop, vm-lifecycle skill, CI fixes; PR #5 merges upstream Jun→Oct. **VMs run upstream v0.20.0 (a6ede70), not this fork** | core, active |
+| [hermes-agent](https://github.com/ScuraUrsa/hermes-agent) | `main` | Fork of NousResearch Hermes Agent: provider semaphore, kanban goal-loop, vm-lifecycle skill, CI fixes; PR #5 merges upstream Jun→Oct. **VMs run upstream v0.20.0 (a6ede70), not this fork**; prod also carries an untracked `tools/push_message_tool.py` | core, active |
 | hermes-timeplane (private, not in this session's scope) | – | Time management: `tp` CLI, plugin, skill, intake service, HA packages; deployed by WOBI role `timeplane` | core, active |
 | [crewai-orchestrator](https://github.com/ScuraUrsa/crewai-orchestrator) | `master` | Old CrewAI app (retired) + **work log of the autonomy loop**: ~900 docs, decision logs, runbooks (`RUNBOOK-autonomy-loop.md`, delivery gate), YouTube archive scripts, `delivery_gate.py` | active (docs/scripts), app retired |
 | [packer-images](https://github.com/ScuraUrsa/packer-images) | `master` | Optional `hermes-base` VirtualBox image (Ubuntu 22.04 + WOBI base/docker) | core-optional |
@@ -24,7 +24,7 @@ keep for reference · **legacy** = superseded · ⚠️ = contains leaked secret
 | [hermes-gui-automation](https://github.com/ScuraUrsa/hermes-gui-automation) | `master` | `hermes_gui` library (AT-SPI2, OCR, VLM, Playwright), skill, Ansible; PR #2 `hermes-teach` (record user actions → skills) | revived 2026-10-10 |
 | [hermes-voice-assistant](https://github.com/ScuraUrsa/hermes-voice-assistant) | `master` | Voice stack design (Open WebUI voice, HA Wyoming, wake word); real voice now runs via WOBI `home_assistant` | dormant |
 | [hermes-conduit-bridge](https://github.com/ScuraUrsa/hermes-conduit-bridge) | `master` | Flutter/Android client stub for the bridge; APK never built | dormant |
-| [hermes-contact-crm](https://github.com/ScuraUrsa/hermes-contact-crm) | `main` | Contact CRM in Notion + parsers (FB, WhatsApp, Instagram, vCard) | dormant |
+| [hermes-contact-crm](https://github.com/ScuraUrsa/hermes-contact-crm) | `main` | Contact CRM in Notion + parsers (FB, WhatsApp, Instagram, vCard); CLI `contacts` | **live on prod since 2026-10-11** (private, PR #1 open, not in WOBI yet) |
 | [hermes-trade](https://github.com/ScuraUrsa/hermes-trade) | `main` | Algorithmic trading scaffold (FinBERT, brokers) v0.1.0 | dormant |
 | [hermes-office-suite](https://github.com/ScuraUrsa/hermes-office-suite) | `master` | Empty seed | empty |
 | [nextcloud-deployment](https://github.com/ScuraUrsa/nextcloud-deployment) | `master` | Nextcloud for 50 users design + Ansible (business idea) | dormant, CI green |

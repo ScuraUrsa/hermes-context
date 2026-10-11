@@ -24,4 +24,4 @@ docs/sources/                     original design documents (2026-10-07..09)
 templates/addon/                  AGENTS.md, SKILL.md, WOBI role and registry templates for add-ons
 ```
 
-Snapshot date: **2026-10-10**. Status claims are dated; verify them against the linked sources.
+Snapshot date: **2026-10-11**. Status claims are dated; verify them against the linked sources.

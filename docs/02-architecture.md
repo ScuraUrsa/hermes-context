@@ -40,7 +40,10 @@ Each VM reads only the Bitwarden secrets its role needs; nothing secret is copie
 
 ```
 systemd
-├── hermes-gateway.service          Hermes gateway (API server, cron scheduler, kanban dispatcher tick 60 s)
+├── hermes-gateway.service          Hermes gateway (cron scheduler, kanban dispatcher tick 60 s) and the
+│                                   Hermes API server 127.0.0.1:8642 (OpenAI-compatible, model `hermes`;
+│                                   Home Assistant's voice pipeline talks to it)
+├── hermes-tmux.service (user)      keeps the tmux session `hermes` that the phone attaches to
 ├── hermes-backup.timer (03:00)     ~/.hermes/scripts/hermes_backup.sh → rclone crypt → Google Drive
 ├── hermes-curator.timer            Hermes' session/skill curator
 ├── ollama.service                  local Ollama, only for Honcho embeddings (honcho-embed:qwen3-0.6b)
@@ -52,6 +55,7 @@ systemd
     ├── honcho (api, deriver, postgres, redis, telemetry-sink)   ~/honcho
     ├── homeassistant + wyoming-whisper + wyoming-piper          ~/homeassistant   (prod)
     ├── hermes-notification-bridge :8655                          (prod)
+    ├── matrix (Continuwuity, 127.0.0.1:8008, `tailscale serve` :443) (prod; not in WOBI yet)
     └── crewai stack (worker, redis, postgres, litellm)           RETIRED, off by default
 
 ~/.hermes                      Hermes home: config.yaml, .env, auth.json, SOUL.md, memories/, skills/,
@@ -81,10 +85,10 @@ systemd
 
 | Use | Provider / model | Notes |
 |---|---|---|
-| Main chat | Ollama Cloud `deepseek-v4-pro` (default switched to DeepSeek V4.1 Flash for some paths on 2026-10-05; check `config.yaml`) | two Ollama Pro keys in a credential pool (`fill_first`), kept honest by `ollama_keys.py` |
+| Main chat | Ollama Cloud `deepseek-v4.1-flash` (switched from `deepseek-v4-pro` on 2026-10-05 at Filip's request; the planner cron stays pinned to `deepseek-v4-pro`) | two Ollama Pro keys in a credential pool (`fill_first`), kept honest by `ollama_keys.py` |
 | Profiles / auxiliary tasks | Ollama Cloud `deepseek-v4.1-flash` | `deepseek-v4-flash` was retired 2026-09-25 (HTTP 410) |
 | Coding | Claude Code CLI (Filip's subscription) via `~/.hermes/scripts/cc_run.py`; also Zed headless agent via `agent-run` (WOBI #6, dev) and `gm_run.py` | exit 75 = Claude quota used → block the task, never fall back to coding on Ollama |
-| Honcho reasoning | deepseek-v4.1-flash via Ollama Cloud; embeddings local (`honcho-embed`) | |
+| Honcho reasoning | deepseek-v4.1-flash via Ollama Cloud; embeddings local (`honcho-embed`) | its Ollama spend is **not** in `budget.py`; measure with `~/.hermes/scripts/honcho_usage.py`. Don't change the embedding model/dimension without re-embedding |
 | Speech | Whisper small-int8 (pl), Piper `pl_PL-gosia-medium` | in HA compose |
 
 Benchmark of coding frameworks × providers on Hermes tasks (2026-10-09): Claude Code + opus solved 7/7,

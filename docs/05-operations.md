@@ -11,7 +11,7 @@ The authoritative runbook on the VMs is the Hermes skill **`hermes-operations`**
 | `autonomy-budget-governor` | 15 min | dev | prices sessions in USD (`budget.py`), parks self-tasks when the cap is hit |
 | `quota-governor` | 10 min | dev | `quota_governor.py`: decides mode `coding` / `non_coding` / `idle` in `~/.hermes/autonomy/quota.json`, holds tasks (`NO_OLLAMA`, `BUDGET`, `CLAUDE_QUOTA`), runs `ollama_keys.py check --apply` |
 | `gh-actions-watchdog` ("CI doctor") | 15 min | dev | finds red GitHub Actions in ScuraUrsa repos, opens fix tasks (no duplicates, respects budget) |
-| `pr-merge-watch` | 10 min | dev | `delivery_gate.py reconcile`: closes review tasks and cards after merge (erroring on 2026-10-10: missing venv path) |
+| `pr-merge-watch` | 10 min | dev | `delivery_gate.py reconcile`: closes review tasks (Notion, Google Calendar) and cards after merge (fixed 2026-10-11 after failing since the cutover) |
 | `autonomy-user-inbox` | 5 min | prod | turns `~/.hermes/autonomy/inbox.md` into priority-100 cards |
 | `google-token-check` | daily | prod | silent if OK; prints `GOOGLE AUTH BROKEN` / `BACKUP STALE` otherwise |
 | `timeplane-day` / `-tick` / `-fast` / `-evening` / `-informer` / `-review` | 05:00 / 10 min / 1 min / 19:30 / 03:30 / 16:00 UTC | prod | time management (see timeplane repo) |
@@ -29,8 +29,8 @@ Which job runs on which VM is enforced by WOBI role `hermes_role` (`hermes_role_
 ```
 
 - Priorities: Filip's tasks 100, self-tasks 0–10. Budget caps apply only to self-work (sources `cron`,
-  `kanban`): $4/day, $24/week in `budget.json` (USD, priced with Ollama per-1M rates; was $2/$10 until early
-  October, check the file). Filip's sessions are never capped. On 2026-10-08 self-work overspent the cap
+  `kanban`): $4/day, $24/week in `budget.json` (USD, priced with Ollama per-1M rates; confirmed by Filip on
+  2026-10-11; it was $2/$10 for a while). Filip's sessions are never capped. On 2026-10-08 self-work overspent the cap
   ($11.72 in a day), so treat the cap as unreliable.
 - Worker limits: `kanban.max_in_progress 2`, per profile 1, `max_spawn 1`; `agent.max_turns` coder 40,
   others 60. Plan small tasks (one deliverable, ≤ ~30 steps) instead of raising limits.
@@ -53,6 +53,8 @@ hermes cron list
 hermes kanban list --status blocked
 hermes sessions stats
 hermes memory status                              # Honcho plugin available?
+python3 ~/.hermes/scripts/honcho_usage.py         # Honcho's Ollama spend (outside budget.py)
+cat ~/.hermes/gateway_state.json                  # connected chat platforms
 cat ~/.hermes/autonomy/backup_status.json
 cat /var/lib/wobi/last-run.json                   # which WOBI ref/role was applied last
 ```
