@@ -43,6 +43,8 @@ Keep the add-on usable by a weaker model: a CLI with clear subcommands and a sho
   **dev**. Anything that writes to Filip's accounts must run only when `hermes_role == active`.
 - Talking to Filip: return text from the cron job (delivered by Hermes), write to Notion, or push through
   HA / the notification bridge. Don't invent a new channel.
+  Never call `hermes send -t matrix` while the gateway runs: it reuses the gateway's Matrix device and
+  kills its token (see [05-operations](05-operations.md#matrix)).
 - Memory: read Honcho if you need user context; only prod writes Filip's memory.
 - Cost: every LLM call by Hermes is counted against the self-work budget ($4/day, $24/week in `budget.json`). Coding through
   Claude Code only. Prefer deterministic scripts.
