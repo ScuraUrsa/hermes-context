@@ -81,6 +81,14 @@ truth in Bitwarden. OAuth app "Hermes-Agent" is in production (tokens do not exp
 Re-auth: `~/.hermes/scripts/google_auth_queue.sh` on the VM + SSH tunnel on port 53682 from the PC;
 **Filip clicks the consent himself**. Sending mail or deleting files needs his OK.
 
+## Matrix
+
+The Matrix server (Continuwuity, `~/matrix` on prod) is the planned private chat with Hermes.
+**Never run `hermes send -t matrix` while `hermes-gateway` is running** (noted 2026-10-11). The CLI logs
+in with the same `MATRIX_DEVICE_ID` as the gateway, which invalidates the gateway's access token, and the
+gateway then silently drops incoming messages. Send through the running gateway instead, or stop the
+gateway first.
+
 ## Backups
 
 `~/.hermes/scripts/hermes_backup.sh` (run now) · `list` · `restore <account> <file> [dir]` ·
